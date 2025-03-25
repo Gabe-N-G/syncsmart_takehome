@@ -7,31 +7,31 @@ export default function Home() {
     <main className={styles.main}>
       <div className={styles.container}>
         <h1 className={styles.title}>
-          Create <span className={styles.pinkSpan}>T3</span> App
+        Syncsmart <span className={styles.pinkSpan}>GG</span> Takehome
         </h1>
         <div className={styles.cardRow}>
-          <Link
+          <div
             className={styles.card}
-            href="https://create.t3.gg/en/usage/first-steps"
-            target="_blank"
           >
-            <h3 className={styles.cardTitle}>First Steps →</h3>
+            <h3 className={styles.cardTitle}>Parent Hubspot</h3>
             <div className={styles.cardText}>
-              Just the basics - Everything you need to know to set up your
-              database and authentication.
+              Todo: Add Buttonns to Seed Data. Show count of items in database.
             </div>
-          </Link>
-          <Link
+            <button>Seed 100 users</button>
+            <p>User Count: 'Insert user count variable here'</p>
+            <button>Clear users **For testing purposes only**</button>
+          </div>
+          <div
             className={styles.card}
-            href="https://create.t3.gg/en/introduction"
-            target="_blank"
           >
-            <h3 className={styles.cardTitle}>Documentation →</h3>
-            <div className={styles.cardText}>
-              Learn more about Create T3 App, the libraries it uses, and how to
-              deploy it.
-            </div>
-          </Link>
+            <h3 className={styles.cardTitle}>Child Hubspot</h3>
+              <div className={styles.cardText}>
+                Todo: Add Buttonns to Seed Data. Show count of items in database.
+              </div>
+              <button>Transfer 100 users</button>
+              <p>User Count: 'Insert user count variable here'</p>
+              <button>Clear users **For testing purposes only**</button>
+          </div>
         </div>
       </div>
     </main>
