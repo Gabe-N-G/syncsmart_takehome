@@ -13,19 +13,6 @@ const parentHeaders ={
   }
 }
 
-const hubspot = require('@hubspot/api-client');
-
-const hubspotClient = new hubspot.Client({"accessToken":"YOUR_ACCESS_TOKEN"});
-
-const BatchInputSimplePublicObjectBatchInputUpsert = { inputs: [
-  {"idProperty":"string",
-    "objectWriteTraceId":"string",
-    "id":"string","properties":{"lastname":"S.","firstname":"Mark"}}
-  ] 
-};
-
-
-
 export default async function seedUsers() {
   // console.log("clicked!")
   const inputs: { properties: { 
@@ -33,7 +20,7 @@ export default async function seedUsers() {
     firstname: string, 
     lastname: string }}[] = [];
 
-      for (let i = 0; i < 10; i++) {
+      for (let i = 0; i < 100; i++) {
         // Generate fake user data
         const firstName = faker.person.firstName();
         const lastName = faker.person.lastName();
@@ -49,7 +36,7 @@ export default async function seedUsers() {
         };
         inputs.push(obj)
       }
-      console.log({inputs})
+      // console.log({inputs})
 
       axios.post(batchURL,{inputs},parentHeaders)
         .then((res) => {
