@@ -63,7 +63,7 @@ export async function syncUsers(){
         const results = res.data.results
         for(let i = 0; i < results.length; i++){
           const obj = { //creating each property object
-            properties: {
+            properties: { //specifically using email first and last, as there are other properties like dates within object
                 email: results[i].properties.email,
                 firstname: results[i].properties.firstName,
                 lastname: results[i].properties.lastName
