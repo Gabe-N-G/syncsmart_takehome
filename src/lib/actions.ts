@@ -7,15 +7,16 @@ const contactURL = "https://api.hubapi.com/crm/v3/objects/contacts"
 
 export default async function seedUsers() {
   console.log("clicked!")
+  const inputs: { properties: { 
+    email: string, 
+    firstname: string, 
+    lastname: string }}[] = []
+  ;
       for (let i = 0; i < 100; i++) {
-        const inputs: { properties: { 
-          email: string, 
-          firstname: string, 
-          lastname: string }}[] = []
-        ;
+        
         // Generate fake user data
         const firstName = faker.person.firstName();
-        const lastName = faker.person.lastName();
+        const lastName = faker.name.lastName();
         const email = faker.internet.email();
         // Log the inserted user for reference
         console.log(`Inserted user ${i + 1}: ${firstName} ${lastName} (${email})`);
@@ -29,8 +30,7 @@ export default async function seedUsers() {
         };
 
         inputs.push(obj)
-        console.log(inputs)
-        
       }
+      console.log(inputs)
       console.log('Successfully inserted 100 users into the database');
   }
