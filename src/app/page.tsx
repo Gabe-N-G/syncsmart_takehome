@@ -3,7 +3,7 @@
 'use client'
 
 import styles from "./index.module.css";
-import seedUsers from "../lib/actions"
+import {seedUsers,syncUsers} from "../lib/actions"
 
 export default function Home() {
   return (
@@ -31,7 +31,7 @@ export default function Home() {
               <div className={styles.cardText}>
                 Todo: Add Buttonns to Seed Data. Show count of items in database.
               </div>
-              <button>Transfer 100 users</button>
+              <button onClick={syncUsers}>Transfer 100 users</button>
               <p>User Count: 'Insert user count variable here'</p>
               <button>Clear users **For testing purposes only**</button>
           </div>
