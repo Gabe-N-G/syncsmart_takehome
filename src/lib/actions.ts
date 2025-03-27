@@ -7,7 +7,7 @@ const contactURL = "https://api.hubapi.com/crm/v3/objects/contacts"
 
 const parentHeaders ={
   headers:{
-    Authorization: `Bearer ${env.PARENTVAR}`,
+    Authorization: `Bearer ${env.NEXT_PUBLIC_PARENTVAR}`,
     'Content-Type': 'application/json'
   }
 }
