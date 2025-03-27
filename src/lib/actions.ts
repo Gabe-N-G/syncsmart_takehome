@@ -1,44 +1,36 @@
-//example way to do this.
 
 import { faker } from "@faker-js/faker";
-import postgres from "postgres";
+import axios from "axios";
 
+// Function to generate and insert 100 fake users
+const contactURL = "https://api.hubapi.com/crm/v3/objects/contacts"
 
-const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
+export default async function seedUsers() {
+  console.log("clicked!")
+      for (let i = 0; i < 100; i++) {
+        const inputs: { properties: { 
+          email: string, 
+          firstname: string, 
+          lastname: string }}[] = []
+        ;
+        // Generate fake user data
+        const firstName = faker.person.firstName();
+        const lastName = faker.person.lastName();
+        const email = faker.internet.email();
+        // Log the inserted user for reference
+        console.log(`Inserted user ${i + 1}: ${firstName} ${lastName} (${email})`);
 
-// Create a MySQL connection
-const connection = postgres({
-  host: 'localhost', // Your database host
-  user: 'root',      // Your database username
-  password: '',      // Your database password
-  database: 'your_database_name', // Your database name
-});
+        const obj = {
+              properties: {
+                  email,
+                  firstname: firstName,
+                  lastname: lastName
+               }
+        };
 
-// Function to seed data
-const seedDatabase = async () => {
-  const users = [];
-  
-  // Generate 100 fake users
-  for (let i = 0; i < 100; i++) {
-    const firstName = faker.name.firstName();
-    const lastName = faker.name.lastName();
-    const email = faker.internet.email();
-    
-    users.push([firstName, lastName, email]);  // Push user data into an array
+        inputs.push(obj)
+        console.log(inputs)
+        
+      }
+      console.log('Successfully inserted 100 users into the database');
   }
-
-  // Create SQL query to insert data
-  const query = 'INSERT INTO users (first_name, last_name, email) VALUES ?';
-  
-  // Insert fake data into the database
-  connection.query(query, [users], (err, results) => {
-    if (err) {
-      console.error('Error inserting data: ', err);
-    } else {
-      console.log(`${results.affectedRows} records inserted`);
-    }
-
-    // Close the connection
-    connection.end();
-  });
-};
