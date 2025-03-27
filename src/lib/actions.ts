@@ -78,13 +78,13 @@ export async function syncUsers() {
           properties: {
             //specifically using email first and last, as there are other properties like dates within object
             email: results[i].properties.email,
-            firstname: results[i].properties.firstName,
-            lastname: results[i].properties.lastName,
+            firstname: results[i].properties.firstname,
+            lastname: results[i].properties.lastname,
           },
         };
         inputs.push(obj);
       }
-      // console.log(inputs);
+      console.log(inputs);
       return axios
         .post(batchURL, { inputs }, childHeaders) //inputs is an object here so it can format correctly in call
         .then((res) => {
