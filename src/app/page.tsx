@@ -4,6 +4,12 @@
 
 import styles from "./index.module.css";
 import {seedUsers,syncUsers} from "../lib/actions"
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
 
 export default function Home() {
   return (
@@ -13,27 +19,25 @@ export default function Home() {
         Syncsmart <span className={styles.pinkSpan}>GG</span> Takehome
         </h1>
         <div className={styles.cardRow}>
-          <div
+          <Box
             className={styles.card}
           >
             <h3 className={styles.cardTitle}>Parent Hubspot</h3>
             <div className={styles.cardText}>
-              Todo: Add Buttonns to Seed Data. Show count of items in database.
             </div>
-            <button onClick={seedUsers}>Seed 100 users</button>
-            <p>User Count: 'Insert user count variable here'</p>
-            <button>Clear users **For testing purposes only**</button>
-          </div>
+            <Button variant="contained" onClick={seedUsers}>Seed 100 users</Button>
+            <Button variant="outlined" color="error">TODO: Clear users **For testing purposes only**</Button>
+            <p>TODO: Add place for data readout here</p>
+          </Box>
           <div
             className={styles.card}
           >
             <h3 className={styles.cardTitle}>Child Hubspot</h3>
               <div className={styles.cardText}>
-                Todo: Add Buttonns to Seed Data. Show count of items in database.
               </div>
-              <button onClick={syncUsers}>Transfer 100 users</button>
-              <p>User Count: 'Insert user count variable here'</p>
-              <button>Clear users **For testing purposes only**</button>
+              <Button variant="contained" onClick={syncUsers}>Transfer 100 users</Button>
+              <Button variant="outlined" color="error">TODO: Clear users **For testing purposes only**</Button>
+              <p>TODO: Add place for data readout here</p>
           </div>
         </div>
       </div>
