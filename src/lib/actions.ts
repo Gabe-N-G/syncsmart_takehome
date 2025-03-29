@@ -5,6 +5,7 @@ import axios from "axios";
 // Function to generate and insert 100 fake users
 const fetchURL = "https://api.hubapi.com/crm/v3/objects/contacts?limit=100";
 const batchURL = "https://api.hubapi.com/crm/v3/objects/contacts/batch/create";
+const archiveURL = "https://api.hubapi.com/crm/v3/objects/contacts/batch/archive";
 const parentHeaders = {
   headers: {
     Authorization: `Bearer ${process.env.PARENTVAR}`,
@@ -93,4 +94,24 @@ export async function syncUsers() {
         .catch((err) => console.error("something went wrong with post", err));
     })
     .catch((err) => console.error("something went wrong with fetch", err));
+}
+
+export async function archiveParent(){
+  console.log("clicked!")
+  await axios
+    .get(fetchURL, parentHeaders)
+    .then((res) => {
+      console.log("fetched: ", res.data.results);
+      const inputs: string[] = [] 
+      for(let i = 0 ; i< res.data.results.length; i++){
+        inputs.push(res.data.results[i].id)
+        console.log(inputs)
+      }
+    return axios
+      .post(archiveURL,{inputs},parentHeaders)
+      .then((res) => {console.log("archived 100 items",res)
+      })
+      .catch((err) => console.error("something went wrong", err));
+    })
+    .catch((err) => console.error("something went wrong", err));
 }
