@@ -3,7 +3,7 @@
 'use client'
 
 import styles from "./index.module.css";
-import {seedUsers,syncUsers,archiveParent} from "../lib/actions"
+import {seedUsers,syncUsers,archiveParent,archive} from "../lib/actions"
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import '@fontsource/roboto/300.css';
@@ -26,7 +26,7 @@ export default function Home() {
             <div className={styles.cardText}>
             </div>
             <Button variant="contained" onClick={seedUsers}>Seed 100 users</Button>
-            <Button variant="outlined" color="error" onClick={archiveParent}>Clear users **For testing purposes only**</Button>
+            <Button variant="outlined" color="error" onClick={() => archive("parent")}>Clear users **For testing purposes only**</Button>
             <p>TODO: Add place for data readout here</p>
           </Box>
           <div

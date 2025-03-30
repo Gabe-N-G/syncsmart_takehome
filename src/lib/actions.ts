@@ -2,6 +2,7 @@
 
 import { faker } from "@faker-js/faker";
 import axios from "axios";
+import { E } from "node_modules/@faker-js/faker/dist/airline-CBNP41sR";
 // Function to generate and insert 100 fake users
 const fetchURL = "https://api.hubapi.com/crm/v3/objects/contacts?limit=100";
 const batchURL = "https://api.hubapi.com/crm/v3/objects/contacts/batch/create";
@@ -96,6 +97,15 @@ export async function syncUsers() {
     .catch((err) => console.error("something went wrong with fetch", err));
 }
 
+
+export async function archive(querytype:string){
+  if (querytype =="parent"){
+    archiveParent()
+  } else if (querytype == "child"){
+    archiveChild()
+  }
+}
+
 export async function archiveParent(){
   console.log("clicked!")
   await axios
@@ -109,6 +119,26 @@ export async function archiveParent(){
       }
     return axios
       .post(archiveURL,{inputs},parentHeaders)
+      .then((res) => {console.log("archived 100 items",res)
+      })
+      .catch((err) => console.error("something went wrong", err));
+    })
+    .catch((err) => console.error("something went wrong", err));
+}
+
+export async function archiveChild(){
+  console.log("clicked!")
+  await axios
+    .get(fetchURL, childHeaders)
+    .then((res) => {
+      console.log("fetched: ", res.data.results);
+      const inputs: string[] = [] 
+      for(let i = 0 ; i< res.data.results.length; i++){
+        inputs.push(res.data.results[i].id)
+        console.log(inputs)
+      }
+    return axios
+      .post(archiveURL,{inputs},childHeaders)
       .then((res) => {console.log("archived 100 items",res)
       })
       .catch((err) => console.error("something went wrong", err));
