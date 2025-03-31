@@ -2,7 +2,9 @@
 
 import { faker } from "@faker-js/faker";
 import axios from "axios";
-// Function to generate and insert 100 fake users
+import { revalidatePath } from "next/cache";
+// import Router from "next/router";
+
 const fetchURL = "https://api.hubapi.com/crm/v3/objects/contacts?limit=100";
 const batchURL = "https://api.hubapi.com/crm/v3/objects/contacts/batch/create";
 const archiveURL = "https://api.hubapi.com/crm/v3/objects/contacts/batch/archive";
@@ -26,7 +28,7 @@ export async function fetchParent() {
   try {
     const res = await axios.get(fetchURL, parentHeaders);
     console.log("fetched: ", res.data.results);
-    return res.data.results; // Return the results from the function
+    return res.data.results;
   } catch (err) {
     console.error(err);
   }
@@ -36,7 +38,7 @@ export async function fetchChild() {
   try {
     const res = await axios.get(fetchURL, childHeaders);
     console.log("fetched: ", res.data.results);
-    return res.data.results; // Return the results from the function
+    return res.data.results; 
   } catch (err) {
     console.error(err);
   }
@@ -75,6 +77,7 @@ export async function seedUsers() {
     .post(batchURL, { inputs }, parentHeaders) //inputs is an object here so it can format correctly in call
     .then((res) => {
       console.log("Sucessfully seeded 100 items", res);
+      revalidatePath('/') //refreshes/updates data, definitely can be improved, but this is one way to do this.
     })
     .catch((err) => console.error(err));
 }
@@ -112,20 +115,13 @@ export async function syncUsers() {
         .post(batchURL, { inputs }, childHeaders) //inputs is an object here so it can format correctly in call
         .then((res) => {
           console.log("Sucessfully seeded 100 items to child database", res);
+          revalidatePath('/') //refreshes/updates data, definitely can be improved, but this is one way to do this.
         })
         .catch((err) => console.error("something went wrong with post", err));
     })
     .catch((err) => console.error("something went wrong with fetch", err));
 }
 
-
-// export async function archive(querytype:string){
-//   if (querytype =="parent"){
-//     archiveParent()
-//   } else if (querytype == "child"){
-//     archiveChild()
-//   }
-// }
 
 export async function archiveParent(){
   console.log("clicked!")
@@ -141,6 +137,7 @@ export async function archiveParent(){
     return axios
       .post(archiveURL,{inputs},parentHeaders)
       .then((res) => {console.log("archived 100 items",res)
+      revalidatePath('/') //refreshes/updates data, definitely can be improved, but this is one way to do this.
       })
       .catch((err) => console.error("something went wrong", err));
     })
@@ -161,6 +158,7 @@ export async function archiveChild(){
     return axios
       .post(archiveURL,{inputs},childHeaders)
       .then((res) => {console.log("archived 100 items",res)
+       revalidatePath('/') //refreshes/updates data, definitely can be improved, but this is one way to do this.
       })
       .catch((err) => console.error("something went wrong", err));
     })
