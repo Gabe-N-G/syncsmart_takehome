@@ -3,7 +3,6 @@
 import { faker } from "@faker-js/faker";
 import axios from "axios";
 import { revalidatePath } from "next/cache";
-// import Router from "next/router";
 
 const fetchURL = "https://api.hubapi.com/crm/v3/objects/contacts?limit=100";
 const batchURL = "https://api.hubapi.com/crm/v3/objects/contacts/batch/create";
@@ -21,8 +20,6 @@ const childHeaders = {
     "Content-Type": "application/json",
   },
 };
-
-
 
 export async function fetchParent() {
   try {
@@ -73,13 +70,13 @@ export async function seedUsers() {
     inputs.push(obj); //pushing objects into a larger array
   }
   // console.log({inputs})
-  await axios
-    .post(batchURL, { inputs }, parentHeaders) //inputs is an object here so it can format correctly in call
-    .then((res) => {
-      console.log("Sucessfully seeded 100 items", res);
-      revalidatePath('/') //refreshes/updates data, definitely can be improved, but this is one way to do this.
-    })
-    .catch((err) => console.error(err));
+  try {
+    const res = await axios.post(batchURL, { inputs }, parentHeaders); 
+    console.log("Successfully seeded 100 items", res);
+    revalidatePath('/'); //refreshes/updates data
+  } catch (err) {
+    console.error("Error seeding users:", err);
+  }
 }
 
 export async function syncUsers() {
@@ -93,74 +90,85 @@ export async function syncUsers() {
     };
   }[] = [];
 
-  await axios
-    .get(fetchURL, parentHeaders)
-    .then((res) => {
-      // console.log("fetched: ", res.data.results);
-      const results = res.data.results;
-      for (let i = 0; i < results.length; i++) {
-        const obj = {
-          //creating each property object
-          properties: {
-            //specifically using email first and last, as there are other properties like dates within object
-            email: results[i].properties.email,
-            firstname: results[i].properties.firstname,
-            lastname: results[i].properties.lastname,
-          },
-        };
-        inputs.push(obj);
-      }
-      console.log(inputs);
-      return axios
-        .post(batchURL, { inputs }, childHeaders) //inputs is an object here so it can format correctly in call
-        .then((res) => {
-          console.log("Sucessfully seeded 100 items to child database", res);
-          revalidatePath('/') //refreshes/updates data, definitely can be improved, but this is one way to do this.
-        })
-        .catch((err) => console.error("something went wrong with post", err));
-    })
-    .catch((err) => console.error("something went wrong with fetch", err));
+  try {
+    const fetchResponse = await axios.get(fetchURL, parentHeaders);
+    // console.log("fetched: ", fetchResponse.data.results);
+    const results = fetchResponse.data.results;
+
+    for (let i = 0; i < results.length; i++) {
+      const obj = {
+        //creating each property object
+        properties: {
+          //specifically using email, first and last name, as there are other properties like dates within the object
+          email: results[i].properties.email,
+          firstname: results[i].properties.firstname,
+          lastname: results[i].properties.lastname,
+        },
+      };
+      inputs.push(obj);
+    }
+    console.log(inputs);
+
+    // Now post the data
+    try {
+      const postResponse = await axios.post(batchURL, { inputs }, childHeaders);
+      console.log("Successfully seeded 100 items to child database", postResponse);
+      revalidatePath('/'); //refreshes/updates data
+    } catch (err) {
+      console.error("Something went wrong with the post request:", err);
+    }
+  } catch (err) {
+    console.error("Something went wrong with the fetch request:", err);
+  }
 }
 
 
 export async function archiveParent(){
-  console.log("clicked!")
-  await axios
-    .get(fetchURL, parentHeaders)
-    .then((res) => {
-      console.log("fetched: ", res.data.results);
-      const inputs: string[] = [] 
-      for(let i = 0 ; i< res.data.results.length; i++){
-        inputs.push(res.data.results[i].id)
-        console.log(inputs)
-      }
-    return axios
-      .post(archiveURL,{inputs},parentHeaders)
-      .then((res) => {console.log("archived 100 items",res)
-      revalidatePath('/') //refreshes/updates data, definitely can be improved, but this is one way to do this.
-      })
-      .catch((err) => console.error("something went wrong", err));
-    })
-    .catch((err) => console.error("something went wrong", err));
+  // console.log("clicked!")
+  try {
+    const fetchResponse = await axios.get(fetchURL, parentHeaders);
+    console.log("fetched: ", fetchResponse.data.results);
+    
+    const inputs: string[] = []; //creates an array of all the 100 ids inside the database
+    for (let i = 0; i < fetchResponse.data.results.length; i++) {
+      inputs.push(fetchResponse.data.results[i].id);
+      console.log(inputs);
+    }
+
+    try {
+      const postResponse = await axios.post(archiveURL, { inputs }, parentHeaders);
+      console.log("Archived 100 items", postResponse);
+      revalidatePath('/'); // Refreshes/updates data
+    } catch (err) {
+      console.error("Something went wrong with the post request", err);
+    }
+
+  } catch (err) {
+    console.error("Something went wrong with the fetch request", err);
+  }
 }
 
 export async function archiveChild(){
-  console.log("clicked!")
-  await axios
-    .get(fetchURL, childHeaders)
-    .then((res) => {
-      console.log("fetched: ", res.data.results);
-      const inputs: string[] = [] 
-      for(let i = 0 ; i< res.data.results.length; i++){
-        inputs.push(res.data.results[i].id)
-        console.log(inputs)
-      }
-    return axios
-      .post(archiveURL,{inputs},childHeaders)
-      .then((res) => {console.log("archived 100 items",res)
-       revalidatePath('/') //refreshes/updates data, definitely can be improved, but this is one way to do this.
-      })
-      .catch((err) => console.error("something went wrong", err));
-    })
-    .catch((err) => console.error("something went wrong", err));
+  // console.log("clicked!")
+  try {
+    const fetchResponse = await axios.get(fetchURL, childHeaders);
+    console.log("fetched: ", fetchResponse.data.results);
+    
+    const inputs: string[] = []; //creates an array of all the 100 ids inside the database
+    for (let i = 0; i < fetchResponse.data.results.length; i++) {
+      inputs.push(fetchResponse.data.results[i].id);
+      console.log(inputs);
+    }
+
+    try {
+      const postResponse = await axios.post(archiveURL, { inputs }, childHeaders);
+      console.log("Archived 100 items", postResponse);
+      revalidatePath('/'); // Refreshes/updates data
+    } catch (err) {
+      console.error("Something went wrong with the post request", err);
+    }
+
+  } catch (err) {
+    console.error("Something went wrong with the fetch request", err);
+  }
 }

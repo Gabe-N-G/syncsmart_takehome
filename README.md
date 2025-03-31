@@ -16,4 +16,4 @@ Bonus Points For:
 - ⚠️ Styling the pages and/or rendering more data
 - ❌ Authentication
 - ✅ A ReadMe that documents the features implemented (Here!)
-- Treat these "requirements" as open-ended and non-strict. The goal is to show off your skills and impress your future co-workers.
+- 😻 Treat these "requirements" as open-ended and non-strict. The goal is to show off your skills and impress your future co-workers.

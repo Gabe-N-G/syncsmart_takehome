@@ -1,4 +1,3 @@
-// import Link from "next/link";
 
 import styles from "./index.module.css";
 import {seedUsers,syncUsers,fetchChild,fetchParent,archiveChild,archiveParent} from "../lib/actions"
@@ -9,14 +8,12 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 
-
-const fetchURL = "https://api.hubapi.com/crm/v3/objects/contacts?limit=100";
-
 export default async function Home() {
   // server side fetching
   const parentData = await fetchParent()
   const childData = await fetchChild()
-  console.log(parentData)
+  const sortedParent = parentData.sort((a, b) => a.properties.email.localeCompare(b.properties.email)); //sorting the parent data aphabetically by email, so they line up better when put into our program
+  const sortedChild = childData.sort((a, b) => a.properties.email.localeCompare(b.properties.email))
 
 
   return (
@@ -35,6 +32,16 @@ export default async function Home() {
             <Button variant="contained" onClick={seedUsers}>Seed 100 users</Button>
             <Button variant="outlined" color="error" onClick={archiveParent}>Archive users **For testing purposes only**</Button>
             <p>{`Total Contacts: ${parentData.length}`} </p>
+            <div>
+              {parentData.length > 0 ? 
+              sortedParent.map(user =>(
+                <div key={user.id}>
+                  <p>First name: {user.properties.firstname} Last Name: {user.properties.lastname} email: {user.properties.email}</p>
+                </div> 
+              ))
+              :
+              "Use the seed Button to seed 100 users!"}
+            </div>
           </Box>
           <div
             className={styles.card}
@@ -45,6 +52,16 @@ export default async function Home() {
               <Button variant="contained" onClick={syncUsers}>Transfer 100 users</Button>
               <Button variant="outlined"  color="error" onClick={archiveChild}>Archive users **For testing purposes only**</Button>
               <p>{`Total Contacts: ${childData.length}`} </p>
+              <div>
+              {childData.length > 0 ? 
+              sortedChild.map(user =>(
+                <div key={user.id}>
+                  <p>First name: {user.properties.firstname} Last Name: {user.properties.lastname} email: {user.properties.email}</p>
+                </div> 
+              ))
+              :
+              "Use the seed Button to seed 100 users!"}
+            </div>
               </div>
         </div>
       </div>
