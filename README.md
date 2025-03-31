@@ -1,29 +1,19 @@
-# Create T3 App
+# Syncsmart Takehome Challenge - Gabriel Gutierrez
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+## Requirements
+- ✅ Use https://create.t3.gg/ to initialize a new NextJS app using the "pages" router.
+- ✅ Create a developer account in HubSpot. Make two test portals in HubSpot.
+- ✅ You can use "private app tokens" to authenticate with HubSpot’s API or go the distance with OAuth.
+- ✅ Use MUI (https://mui.com/material-ui/) as your component library.
+- ⚠️ Use Typescript to the best of your ability.
+- ✅ Find a library for generating fake data and make a page on your app with a button that generates 100 contacts in one of the test accounts. The contacts should at least have a first name, last name and email.
+- ✅ Make another button that pulls those contacts from the first HubSpot portal and creates them in the second HubSpot portal.
+- ✅ Add spencer@syncsmart.io as a user to your HubSpot test portals.
+- ✅ Record and share a video showing your process, results and work. [Loom Video](https://www.loom.com/share/c3d55c3b997c416fb22a296a1fbf357f)
 
-## What's next? How do I make an app with this?
-
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
-
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
-
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Drizzle](https://orm.drizzle.team)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
-
-## Learn More
-
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
-
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
-
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
-
-## How do I deploy this?
-
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+Bonus Points For:
+- ❌ Using tRPC (part of the createT3 starter kit)
+- ⚠️ Styling the pages and/or rendering more data
+- ❌ Authentication
+- ✅ A ReadMe that documents the features implemented (Here!)
+- Treat these "requirements" as open-ended and non-strict. The goal is to show off your skills and impress your future co-workers.

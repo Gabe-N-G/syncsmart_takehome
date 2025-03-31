@@ -33,7 +33,7 @@ export default async function Home() {
             <div className={styles.cardText}>
             </div>
             <Button variant="contained" onClick={seedUsers}>Seed 100 users</Button>
-            <Button variant="outlined" color="error" onClick={archiveParent}>Clear users **For testing purposes only**</Button>
+            <Button variant="outlined" color="error" onClick={archiveParent}>Archive users **For testing purposes only**</Button>
             <p>{`Total Contacts: ${parentData.length}`} </p>
           </Box>
           <div
@@ -43,7 +43,7 @@ export default async function Home() {
               <div className={styles.cardText}>
               </div>
               <Button variant="contained" onClick={syncUsers}>Transfer 100 users</Button>
-              <Button variant="outlined"  color="error" onClick={archiveChild}>TODO: Clear users **For testing purposes only**</Button>
+              <Button variant="outlined"  color="error" onClick={archiveChild}>Archive users **For testing purposes only**</Button>
               <p>{`Total Contacts: ${childData.length}`} </p>
               </div>
         </div>
