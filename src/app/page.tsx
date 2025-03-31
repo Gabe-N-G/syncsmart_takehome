@@ -44,7 +44,7 @@ export default async function Home() {
               <div className={styles.cardText}>
               </div>
               <Button variant="contained" onClick={syncUsers}>Transfer 100 users</Button>
-              <Button variant="outlined"  color="error" onClick={archiveParent}>TODO: Clear users **For testing purposes only**</Button>
+              <Button variant="outlined"  color="error" onClick={archiveChild}>TODO: Clear users **For testing purposes only**</Button>
               <p>{`Total Contacts: ${childData.length}`} </p>
               </div>
         </div>
