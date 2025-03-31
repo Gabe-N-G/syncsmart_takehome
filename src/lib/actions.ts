@@ -2,7 +2,6 @@
 
 import { faker } from "@faker-js/faker";
 import axios from "axios";
-import { E } from "node_modules/@faker-js/faker/dist/airline-CBNP41sR";
 // Function to generate and insert 100 fake users
 const fetchURL = "https://api.hubapi.com/crm/v3/objects/contacts?limit=100";
 const batchURL = "https://api.hubapi.com/crm/v3/objects/contacts/batch/create";
@@ -20,6 +19,28 @@ const childHeaders = {
     "Content-Type": "application/json",
   },
 };
+
+
+
+export async function fetchParent() {
+  try {
+    const res = await axios.get(fetchURL, parentHeaders);
+    console.log("fetched: ", res.data.results);
+    return res.data.results; // Return the results from the function
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+export async function fetchChild() {
+  try {
+    const res = await axios.get(fetchURL, childHeaders);
+    console.log("fetched: ", res.data.results);
+    return res.data.results; // Return the results from the function
+  } catch (err) {
+    console.error(err);
+  }
+}
 
 export async function seedUsers() {
   // console.log("clicked!")
@@ -98,13 +119,13 @@ export async function syncUsers() {
 }
 
 
-export async function archive(querytype:string){
-  if (querytype =="parent"){
-    archiveParent()
-  } else if (querytype == "child"){
-    archiveChild()
-  }
-}
+// export async function archive(querytype:string){
+//   if (querytype =="parent"){
+//     archiveParent()
+//   } else if (querytype == "child"){
+//     archiveChild()
+//   }
+// }
 
 export async function archiveParent(){
   console.log("clicked!")

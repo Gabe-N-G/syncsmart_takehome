@@ -1,9 +1,8 @@
 // import Link from "next/link";
-
-'use client'
+// 'use client'
 
 import styles from "./index.module.css";
-import {seedUsers,syncUsers,archiveParent,archive} from "../lib/actions"
+import {seedUsers,syncUsers,fetchChild, fetchParent,archiveChild,archiveParent} from "../lib/actions"
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import '@fontsource/roboto/300.css';
@@ -11,7 +10,16 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 
-export default function Home() {
+
+
+const fetchURL = "https://api.hubapi.com/crm/v3/objects/contacts?limit=100";
+
+export default async function Home() {
+  const parentData = await fetchParent()
+  const childData = await fetchChild()
+  console.log(parentData)
+
+
   return (
     <main className={styles.main}>
       <div className={styles.container}>
@@ -26,8 +34,8 @@ export default function Home() {
             <div className={styles.cardText}>
             </div>
             <Button variant="contained" onClick={seedUsers}>Seed 100 users</Button>
-            <Button variant="outlined" color="error" onClick={() => archive("parent")}>Clear users **For testing purposes only**</Button>
-            <p>TODO: Add place for data readout here</p>
+            <Button variant="outlined" color="error" onClick={archiveParent}>Clear users **For testing purposes only**</Button>
+            <p>{`Total Contacts: ${parentData.length}`} </p>
           </Box>
           <div
             className={styles.card}
@@ -36,9 +44,9 @@ export default function Home() {
               <div className={styles.cardText}>
               </div>
               <Button variant="contained" onClick={syncUsers}>Transfer 100 users</Button>
-              <Button variant="outlined" color="error">TODO: Clear users **For testing purposes only**</Button>
-              <p>TODO: Add place for data readout here</p>
-          </div>
+              <Button variant="outlined"  color="error" onClick={archiveParent}>TODO: Clear users **For testing purposes only**</Button>
+              <p>{`Total Contacts: ${childData.length}`} </p>
+              </div>
         </div>
       </div>
     </main>
