@@ -13,6 +13,17 @@ export default async function Home() {
   const sortedParent = parentData.sort((a, b) => a.properties.email.localeCompare(b.properties.email)); //sorting the parent data aphabetically by email, so they line up better when put into our program
   const sortedChild = childData.sort((a, b) => a.properties.email.localeCompare(b.properties.email))
 
+  interface UserProperties {
+    firstname: string;
+    lastname: string;
+    email: string;
+  }
+  
+  interface User {
+    id: string;
+    properties: UserProperties;
+  }
+
 
   return (
       <Container>
@@ -23,7 +34,7 @@ export default async function Home() {
           <Grid  container spacing={2} columns={2}>
             {/* Parent Hubspot Card */}
             <Grid size={1}>
-              <Box sx={{ p: 3, border: 1, borderRadius: 2, boxShadow: 2 }}>
+              <Box sx={{padding: 2, border: 2, borderRadius: 2, boxShadow: 7 }}>
                 <Typography variant="h4" sx={{ fontWeight: 'bold' }}>
                   Parent Hubspot
                 </Typography>
@@ -53,7 +64,7 @@ export default async function Home() {
                         </TableRow>
                       </TableHead>
                       <TableBody>
-                        {sortedParent.map((user) => (
+                        {sortedParent.map((user:User) => (
                           <TableRow key={user.id}>
                             <TableCell>{user.properties.firstname}</TableCell>
                             <TableCell>{user.properties.lastname}</TableCell>
@@ -71,7 +82,7 @@ export default async function Home() {
 
             {/* Child Hubspot Card */}
             <Grid size={1}>
-              <Box sx={{ p: 3, border: 1, borderRadius: 2, boxShadow: 2 }}>
+              <Box sx={{ padding: 2, border: 2, borderRadius: 2, boxShadow: 7}}>
                <Typography variant="h4" sx={{ fontWeight: 'bold' }}>
                  Child Hubspot
                 </Typography>

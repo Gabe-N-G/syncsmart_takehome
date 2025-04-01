@@ -45,7 +45,7 @@ export async function seedUsers() {
   // console.log("clicked!")
   const inputs: {
     properties: {
-      // Creating the formatted array for input properties for hubspot, could change into an alias later
+      // Creating the formatted array for input properties for hubspot, could change into an aliaslater
       email: string;
       firstname: string;
       lastname: string;
