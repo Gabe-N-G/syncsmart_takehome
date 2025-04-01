@@ -1,5 +1,4 @@
 
-import styles from "./index.module.css";
 import {seedUsers,syncUsers,fetchChild,fetchParent,archiveChild,archiveParent} from "../lib/actions"
 import { Container, Box, Button, Typography, Grid, Table, TableHead, TableRow, TableCell, TableBody } from '@mui/material';
 import '@fontsource/roboto/300.css';
@@ -45,7 +44,7 @@ export default async function Home() {
                 <Typography variant="h6">{`Total Contacts: ${parentData.length}`}</Typography>
                 <Box sx={{ marginTop: 2 }}>
                   {parentData.length > 0 ? (
-                    <Table>
+                    <Table size="small">
                       <TableHead>
                         <TableRow>
                           <TableCell>First Name</TableCell>
@@ -64,7 +63,7 @@ export default async function Home() {
                       </TableBody>
                     </Table>
                   ) : (
-                    <Typography variant="body2">Use the seed Button to seed 100 users!</Typography>
+                    <Typography variant="body1">Use the seed Button to seed 100 users!</Typography>
                   )}
                 </Box>
               </Box>
@@ -93,7 +92,7 @@ export default async function Home() {
                 <Typography  variant="h6">{`Total Contacts: ${childData.length}`}</Typography>
                 <Box sx={{ marginTop: 2 }}>
                   {childData.length > 0 ? (
-                    <Table>
+                    <Table size="small">
                       <TableHead>
                         <TableRow>
                           <TableCell>First Name</TableCell>
@@ -112,7 +111,7 @@ export default async function Home() {
                       </TableBody>
                     </Table>
                   ) : (
-                    <Typography variant="body2">Use the seed Button to seed 100 users!</Typography>
+                    <Typography variant="body1">Use the seed Button to seed 100 users!</Typography>
                   )}
                 </Box>
               </Box>
