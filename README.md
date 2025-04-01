@@ -17,3 +17,7 @@ Bonus Points For:
 - ❌ Authentication
 - ✅ A ReadMe that documents the features implemented (Here!)
 - 😻 Treat these "requirements" as open-ended and non-strict. The goal is to show off your skills and impress your future co-workers.
+
+My own strech goals:
+- Try to figure out pagination/suspend from the next.js library to give 10 per page views of items
+- Make website typesafe enough to launch on vercel
