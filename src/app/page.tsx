@@ -10,20 +10,19 @@ export default async function Home() {
   // server side fetching
   const parentData = await fetchParent()
   const childData = await fetchChild()
-  const sortedParent = parentData.sort((a, b) => a.properties.email.localeCompare(b.properties.email)); //sorting the parent data aphabetically by email, so they line up better when put into our program
-  const sortedChild = childData.sort((a, b) => a.properties.email.localeCompare(b.properties.email))
 
-  interface UserProperties {
-    firstname: string;
-    lastname: string;
-    email: string;
-  }
-  
   interface User {
     id: string;
-    properties: UserProperties;
+    properties: {
+      firstname: string;
+      lastname: string;
+       email: string;
+    }
   }
 
+
+  const sortedParent = parentData.sort((a:User, b:User) => a.properties.email.localeCompare(b.properties.email)); //sorting the parent data aphabetically by email, so they line up better when put into our program
+  const sortedChild = childData.sort((a:User, b:User) => a.properties.email.localeCompare(b.properties.email))
 
   return (
       <Container>
@@ -112,7 +111,7 @@ export default async function Home() {
                         </TableRow>
                       </TableHead>
                       <TableBody>
-                        {sortedChild.map((user) => (
+                        {sortedChild.map((user:User) => (
                           <TableRow key={user.id}>
                             <TableCell>{user.properties.firstname}</TableCell>
                             <TableCell>{user.properties.lastname}</TableCell>
