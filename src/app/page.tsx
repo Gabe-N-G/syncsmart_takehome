@@ -11,7 +11,7 @@ export default async function Home() {
   const parentData = await fetchParent()
   const childData = await fetchChild()
 
-  interface User {
+  type User  = {
     id: string;
     properties: {
       firstname: string;
@@ -19,7 +19,6 @@ export default async function Home() {
        email: string;
     }
   }
-
 
   const sortedParent = parentData.sort((a:User, b:User) => a.properties.email.localeCompare(b.properties.email)); //sorting the parent data aphabetically by email, so they line up better when put into our program
   const sortedChild = childData.sort((a:User, b:User) => a.properties.email.localeCompare(b.properties.email))

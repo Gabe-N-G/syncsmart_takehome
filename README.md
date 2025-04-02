@@ -81,6 +81,8 @@ export async function seedUsers() {
 This creates 100 fake users with first names, last names, and emails. It stores all of these in an array and uses the [https://api.hubapi.com/crm/v3/objects/contacts/batch/create](https://developers.hubspot.com/docs/reference/api/crm/objects/contacts#post-%2Fcrm%2Fv3%2Fobjects%2Fcontacts%2Fbatch%2Fcreate)
 batch create endpoint to move them into the Parent Test portal. After the operation is done, it refereshes the server components to show the changes in the database.
 
+---
+
 ### syncUsers()
 
 ```js
@@ -130,8 +132,10 @@ export async function syncUsers() {
 
 This command first gets up to 100 items from the parent database using the [/crm/v3/objects/contacts](https://developers.hubspot.com/docs/reference/api/crm/objects/contacts#get-%2Fcrm%2Fv3%2Fobjects%2Fcontacts) endpoint in the parent test portal. It then copies the first name, last name, and email properties and puts them in an array in a greater inputs object. It then uses the [https://api.hubapi.com/crm/v3/objects/contacts/batch/create](https://developers.hubspot.com/docs/reference/api/crm/objects/contacts#post-%2Fcrm%2Fv3%2Fobjects%2Fcontacts%2Fbatch%2Fcreate) endpoint in the child test portal to create 100 duplicate entries in the other portal. It then refreshes the server side components to update the data seen on the page.
 
+---
 
-### archiveParent()
+
+### archiveParent() / archiveChild()
 ```js
 export async function archiveParent(){
   // console.log("clicked!")
@@ -160,3 +164,7 @@ export async function archiveParent(){
 ```
 
 For testing purposes only I created a way to batch archive the items I've seeded/synced into either test portal. It'd probably be a bit dangerous to use this outside of a testing enviroment. To do this, I first fetched all the items from a portal using the [/crm/v3/objects/contacts](https://developers.hubspot.com/docs/reference/api/crm/objects/contacts#get-%2Fcrm%2Fv3%2Fobjects%2Fcontacts) endpoint. After that, it populates an array of id numbers, and sends that to the [/crm/v3/objects/contacts/batch/archive](https://developers.hubspot.com/docs/reference/api/crm/objects/contacts#post-%2Fcrm%2Fv3%2Fobjects%2Fcontacts%2Fbatch%2Farchive) batch archive endpoint. It then refreshes the server side components to update the data seen on the page.
+
+---
+
+# Post MVP Goals
