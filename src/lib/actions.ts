@@ -7,6 +7,8 @@ import { revalidatePath } from "next/cache";
 const fetchURL = "https://api.hubapi.com/crm/v3/objects/contacts?limit=100";
 const batchURL = "https://api.hubapi.com/crm/v3/objects/contacts/batch/create";
 const archiveURL = "https://api.hubapi.com/crm/v3/objects/contacts/batch/archive";
+
+
 const parentHeaders = {
   headers: {
     Authorization: `Bearer ${process.env.PARENTVAR}`,

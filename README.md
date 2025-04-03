@@ -12,6 +12,7 @@
 - ✅ Make another button that pulls those contacts from the first HubSpot portal and creates them in the second HubSpot portal.
 - ✅ Add spencer@syncsmart.io as a user to your HubSpot test portals.
 - ✅ Record and share a video showing your process, results and work. [Loom Video](https://www.loom.com/share/c3d55c3b997c416fb22a296a1fbf357f)
+---
 
 Bonus Points For:
 - ❌ Using tRPC (part of the createT3 starter kit)
@@ -19,6 +20,7 @@ Bonus Points For:
 - ❌ Authentication (OAuth)
 - ✅ A ReadMe that documents the features implemented (Here!)
 - 😻 Treat these "requirements" as open-ended and non-strict. The goal is to show off your skills and impress your future co-workers.
+---
 
 My own strech goals:
 - Make website typesafe enough to launch on vercel
@@ -168,3 +170,19 @@ For testing purposes only I created a way to batch archive the items I've seeded
 ---
 
 # Post MVP Goals
+
+## Improve typescript/Launch on Verel
+
+![vercel errors](public/vercel_errors.png)
+
+Vercel, creator/host of Next.JS offers to host websites built on their platform. Right now, they will not accept my typescript level of files. This is because I have alot of implicit [any](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#any) types. To improve this I'd probably have to create more Alias/Inferences for my objects as I'm just trusting the TSX compiler to deal with them well as any calls.
+
+## TRPC
+
+Related to Typescript, [TRPC](https://trpc.io/) is a library of plugins included with the t3 app maker that allows TypeScript interactions with apis. This way both your calls and response will always be typesafe. Right now, all my calls are strings (id#, email, firstname, lastname), but this would definntely both be helpful now and even more helpful once I start storing other datatypes like numbers and dates in Hubspot customers/associations.
+
+## OAuth/Hubspot Public apps
+
+![Public app making](image.png)
+
+[Hubspot Public Apps](https://developers.hubspot.com/docs/guides/apps/public-apps/overview) Allow a person to run all RESTFUL api actions on multiple test portals from a single address. To do this you'd be using OAuth to authenticate a user, unlike the API tokens I'm using currently. Next.JS has a built in [handler for OAuth](https://nextjs.org/learn/dashboard-app/adding-authentication)

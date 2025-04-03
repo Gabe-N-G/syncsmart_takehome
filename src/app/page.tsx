@@ -5,20 +5,15 @@ import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
+import type {User} from "../lib/definitions"
+
 
 export default async function Home() {
   // server side fetching
   const parentData = await fetchParent()
   const childData = await fetchChild()
 
-  type User  = {
-    id: string;
-    properties: {
-      firstname: string;
-      lastname: string;
-       email: string;
-    }
-  }
+
 
   const sortedParent = parentData.sort((a:User, b:User) => a.properties.email.localeCompare(b.properties.email)); //sorting the parent data aphabetically by email, so they line up better when put into our program
   const sortedChild = childData.sort((a:User, b:User) => a.properties.email.localeCompare(b.properties.email))
